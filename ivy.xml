@@ -1,5 +1,5 @@
 <ivy-module version="2.0">
-  <info organisation="org.bizo" module="page-objects" revision="${revision}"/>
+  <info organisation="org.bizo" module="pageobjects" revision="${revision}"/>
   <configurations>
     <conf name="default"/>
     <conf name="sources"/>

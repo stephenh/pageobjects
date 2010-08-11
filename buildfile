@@ -10,7 +10,7 @@ repositories.release_to[:permissions] = 0644
 Buildr.settings.build['ivy']['home.dir'] = "#{ENV['HOME']}/.ivy2"
 Java.java.lang.System.setProperty("revision", VERSION_NUMBER)
 
-define "page-objects" do
+define "pageobjects" do
   project.version = VERSION_NUMBER
   project.group = 'org.bizo'
   ivy.compile_conf('default')
