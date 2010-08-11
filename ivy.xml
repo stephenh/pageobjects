@@ -5,12 +5,7 @@
     <conf name="sources"/>
   </configurations>
   <dependencies defaultconfmapping="%->default;sources->sources()">
-    <!-- public -->
     <dependency org="org.seleniumhq.selenium" name="selenium" rev="2.0a4" conf="default" />
     <dependency org="junit" name="junit" rev="4.8.1" conf="default" />
-    <!-- bizo
-    <dependency org="selenium" name="selenium-java" rev="2.0a4" />
-    <dependency org="junit" name="junit" rev="4.7" />
-    -->
   </dependencies>
 </ivy-module>
