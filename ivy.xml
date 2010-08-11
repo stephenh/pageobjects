@@ -1,14 +1,13 @@
 <ivy-module version="2.0">
-  <info organisation="org.bizo" module="page-objects" revision="1.0-SNAPSHOT"/>
+  <info organisation="org.bizo" module="page-objects" revision="${revision}"/>
   <configurations>
     <conf name="default"/>
     <conf name="sources"/>
   </configurations>
-  <dependencies defaultconfmapping="%->default;sources->sources()" defaultconf="default,sources">
-    <dependency org="org.seleniumhq.selenium" name="selenium" rev="2.0a4" />
-    <dependency org="junit" name="junit" rev="4.8.1" />
-    <!-- public
-    -->
+  <dependencies defaultconfmapping="%->default;sources->sources()">
+    <!-- public -->
+    <dependency org="org.seleniumhq.selenium" name="selenium" rev="2.0a4" conf="default" />
+    <dependency org="junit" name="junit" rev="4.8.1" conf="default" />
     <!-- bizo
     <dependency org="selenium" name="selenium-java" rev="2.0a4" />
     <dependency org="junit" name="junit" rev="4.7" />
