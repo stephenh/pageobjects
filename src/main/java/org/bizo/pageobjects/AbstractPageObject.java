@@ -1,5 +1,6 @@
 package org.bizo.pageobjects;
 
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -24,7 +25,11 @@ public class AbstractPageObject implements PageObject {
     new WebDriverWait(d, seconds).until(new Function<WebDriver, Boolean>() {
       @Override
       public Boolean apply(final WebDriver from) {
-        return until.get();
+        try {
+          return until.get();
+        } catch (final StaleElementReferenceException sere) {
+          return false;
+        }
       }
     });
   }

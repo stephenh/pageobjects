@@ -32,7 +32,7 @@ public class TextObject extends AbstractElementObject {
   public Supplier<Boolean> nowHasText(final String text) {
     return new Supplier<Boolean>() {
       public Boolean get() {
-        return text.equals(get());
+        return text.equals(TextObject.this.get());
       }
     };
   }
