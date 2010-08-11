@@ -1,6 +1,10 @@
 package org.bizo.pageobjects;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.google.common.base.Function;
+import com.google.common.base.Supplier;
 
 /** A base class for user page objects. */
 public class AbstractPageObject implements PageObject {
@@ -12,58 +16,22 @@ public class AbstractPageObject implements PageObject {
     this.d = d;
   }
 
+  protected void wait(final Supplier<Boolean> until) {
+    wait(DefaultWait.SECONDS, until);
+  }
+
+  protected void wait(final int seconds, final Supplier<Boolean> until) {
+    new WebDriverWait(d, seconds).until(new Function<WebDriver, Boolean>() {
+      @Override
+      public Boolean apply(final WebDriver from) {
+        return until.get();
+      }
+    });
+  }
+
+  @Override
   public WebDriver getWebDriver() {
     return d;
-  }
-
-  /** Waits for the ajaxy stuff in <code>wait</code> to happen or times out. */
-  public void wait(final For wait) {
-    final int timeoutInSeconds = wait.getSeconds();
-    final Thread timeoutThread = new Thread(new TimeoutThread(Thread.currentThread(), timeoutInSeconds));
-    timeoutThread.start();
-    try {
-      // Based on Wait in selenium java client
-      final long start = System.currentTimeMillis();
-      final long end = start + (timeoutInSeconds * 1000);
-      while (System.currentTimeMillis() < end) {
-        if (wait.success(getWebDriver())) {
-          break;
-        }
-        try {
-          Thread.sleep(100);
-        } catch (final InterruptedException e) {
-          throw new RuntimeException(e);
-        }
-      }
-    } finally {
-      timeoutThread.interrupt();
-    }
-  }
-
-  /**
-   * Interrupts the parent thread if it blocks too long.
-   * 
-   * Based on WebDriverBackedSelenium's TimeoutThread.
-   */
-  protected static class TimeoutThread implements Runnable {
-    private final long timeoutInSeconds;
-    private final Thread callback;
-
-    public TimeoutThread(final Thread callback, final long timeoutInSeconds) {
-      this.callback = callback;
-      this.timeoutInSeconds = timeoutInSeconds;
-    }
-
-    public void run() {
-      try {
-        Thread.sleep(timeoutInSeconds * 1000);
-      } catch (final InterruptedException e) {
-        // The timeout has been interrupted.
-        return;
-      }
-      // The timeout has been reach, interrupting the original thread.
-      callback.interrupt();
-    }
   }
 
   @Override

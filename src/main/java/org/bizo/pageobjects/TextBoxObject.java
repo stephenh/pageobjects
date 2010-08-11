@@ -9,7 +9,6 @@ import org.openqa.selenium.Keys;
 public class TextBoxObject extends AbstractElementObject {
 
   private static final String MAC_COMMAND_KEY = "\uE03D";
-  private For waitFor;
 
   public TextBoxObject(final PageObject p, final String id) {
     super(p, id);
@@ -24,13 +23,6 @@ public class TextBoxObject extends AbstractElementObject {
   }
 
   public void type(final String value) {
-    typeWithoutWait(value);
-    if (waitFor != null) {
-      p.wait(waitFor);
-    }
-  }
-
-  public void typeWithoutWait(final String value) {
     // To best simulate typing, send select-all + delete + value + tab out
     // Without the select-all+delete, a separate WebElement.clear() is needed to
     // remove any existing text, but it will result in an extra onchange event.
@@ -43,11 +35,6 @@ public class TextBoxObject extends AbstractElementObject {
 
   private boolean usingMac() {
     return System.getProperty("mrj.version") != null;
-  }
-
-  public TextBoxObject wait(final For waitFor) {
-    this.waitFor = waitFor;
-    return this;
   }
 
   public String get() {

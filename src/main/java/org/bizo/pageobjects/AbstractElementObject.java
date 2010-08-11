@@ -14,6 +14,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.FindsById;
 import org.openqa.selenium.internal.FindsByXPath;
 
+import com.google.common.base.Supplier;
+
 /** A base class for element objects like {@link TextBoxObject}, {@link TextObject}, etc. */
 public abstract class AbstractElementObject {
 
@@ -82,6 +84,15 @@ public abstract class AbstractElementObject {
   @Override
   public String toString() {
     return by.toString();
+  }
+
+  /** @return a supplier for waiting until this is enabled. */
+  public Supplier<Boolean> nowEnabled() {
+    return new Supplier<Boolean>() {
+      public Boolean get() {
+        return element().isEnabled();
+      }
+    };
   }
 
   /** Replaces {@code $id} in otherwise static element ids for use in table/list scenarios. */

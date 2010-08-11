@@ -5,9 +5,9 @@ import static org.junit.Assert.assertThat;
 
 import org.openqa.selenium.By;
 
-public class TextObject extends AbstractElementObject {
+import com.google.common.base.Supplier;
 
-  private For waitFor;
+public class TextObject extends AbstractElementObject {
 
   public TextObject(final PageObject p, final By by) {
     super(p, by);
@@ -22,19 +22,19 @@ public class TextObject extends AbstractElementObject {
   }
 
   public String get() {
-    if (waitFor != null) {
-      p.wait(waitFor);
-    }
     return element().getText();
-  }
-
-  public TextObject wait(final For waitFor) {
-    this.waitFor = waitFor;
-    return this;
   }
 
   public void assertText(final String text) {
     assertThat(get(), is(text));
+  }
+
+  public Supplier<Boolean> nowHasText(final String text) {
+    return new Supplier<Boolean>() {
+      public Boolean get() {
+        return text.equals(get());
+      }
+    };
   }
 
 }
