@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Function;
-import com.google.common.base.Supplier;
 
 /** A base class for user page objects. */
 public class AbstractPageObject implements PageObject {
@@ -18,16 +17,13 @@ public class AbstractPageObject implements PageObject {
     this.d = d;
   }
 
-  protected void wait(final Supplier<Boolean> until) {
-    wait(DefaultWait.SECONDS, until);
-  }
-
-  protected void wait(final int seconds, final Supplier<Boolean> until) {
-    new WebDriverWait(d, seconds).until(new Function<WebDriver, Boolean>() {
+  @Override
+  public void waitFor(final Condition condition) {
+    new WebDriverWait(d, condition.getTimeoutSeconds()).until(new Function<WebDriver, Boolean>() {
       @Override
       public Boolean apply(final WebDriver from) {
         try {
-          return until.get();
+          return condition.getCheck().apply(from);
         } catch (final StaleElementReferenceException sere) {
           return false;
         }
