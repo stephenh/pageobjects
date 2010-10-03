@@ -5,7 +5,8 @@
     <conf name="sources"/>
   </configurations>
   <dependencies defaultconfmapping="%->default;sources->sources()">
-    <dependency org="org.seleniumhq.selenium" name="selenium" rev="2.0a4" conf="default" />
+    <dependency org="org.seleniumhq.selenium" name="selenium" rev="r9790" conf="default" />
+    <dependency org="com.google.collections" name="google-collections" rev="1.0" conf="default" />
     <dependency org="junit" name="junit" rev="4.8.1" conf="default" />
   </dependencies>
 </ivy-module>
