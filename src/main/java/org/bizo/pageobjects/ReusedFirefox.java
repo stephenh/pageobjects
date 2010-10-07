@@ -15,7 +15,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 /** Helper class to reuse a local Firefox instance instead of having FirefoxDriver start one each and every time. */
 public class ReusedFirefox {
 
-  public static WebDriver reconnectOrLaunch(String... extensions) {
+  public static WebDriver reconnectOrLaunch(final String... extensions) {
     if (isAlreadyRunning()) {
       return new RemoteWebDriver(getLocalURL(), DesiredCapabilities.firefox());
     }
@@ -24,16 +24,16 @@ public class ReusedFirefox {
     final FirefoxProfile p = new FirefoxProfile();
     // p.setAlwaysLoadNoFocusLib(true);
     p.setEnableNativeEvents(true);
-    for (String extension : extensions) {
+    for (final String extension : extensions) {
       addExtension(p, extension);
     }
     return new FirefoxDriver(p);
   }
 
-  private static void addExtension(FirefoxProfile p, String extension) {
+  private static void addExtension(final FirefoxProfile p, final String extension) {
     try {
       p.addExtension(new File(extension));
-    } catch (IOException e) {
+    } catch (final IOException e) {
       throw new RuntimeException(e);
     }
   }

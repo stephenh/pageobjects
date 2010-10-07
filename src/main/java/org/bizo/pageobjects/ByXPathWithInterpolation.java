@@ -12,21 +12,21 @@ public final class ByXPathWithInterpolation extends By {
   private final PageObject page;
   private final String xpathExpression;
 
-  public ByXPathWithInterpolation(PageObject page, String xpathExpression) {
-    this.page=page;
+  public ByXPathWithInterpolation(final PageObject page, final String xpathExpression) {
+    this.page = page;
     this.xpathExpression = xpathExpression;
   }
 
   @Override
-  public List<WebElement> findElements(SearchContext context) {
+  public List<WebElement> findElements(final SearchContext context) {
     return ((FindsByXPath) context).findElementsByXPath(getInterpolatedXPath());
   }
 
   @Override
-  public WebElement findElement(SearchContext context) {
+  public WebElement findElement(final SearchContext context) {
     return ((FindsByXPath) context).findElementByXPath(getInterpolatedXPath());
   }
-  
+
   private String getInterpolatedXPath() {
     return page.getOffsetId() == null ? xpathExpression : xpathExpression.replace("$id", page.getOffsetId());
   }

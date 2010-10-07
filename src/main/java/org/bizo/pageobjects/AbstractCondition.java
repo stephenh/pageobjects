@@ -10,7 +10,7 @@ public class AbstractCondition implements Condition {
   private final int timeoutSeconds;
   private final Function<WebDriver, Boolean> check;
 
-  public AbstractCondition(int timeoutSeconds, Function<WebDriver, Boolean> check) {
+  public AbstractCondition(final int timeoutSeconds, final Function<WebDriver, Boolean> check) {
     this.timeoutSeconds = timeoutSeconds;
     this.check = check;
   }

@@ -17,12 +17,12 @@ public class LinkObject extends AbstractElementObject {
     super(p, id);
   }
 
-  public LinkObject(final PageObject p, By by) {
+  public LinkObject(final PageObject p, final By by) {
     super(p, by);
   }
 
   /** Adds {@code condition} as something to wait for after clicking. */
-  public LinkObject afterClickWaitFor(Condition condition) {
+  public LinkObject afterClickWaitFor(final Condition condition) {
     afterClickWaitFor.add(condition);
     return this;
   }
@@ -30,7 +30,7 @@ public class LinkObject extends AbstractElementObject {
   /** Clicks on the link and optionally waits for any after click conditions. */
   public void click() {
     element().click();
-    for (Condition condition : afterClickWaitFor) {
+    for (final Condition condition : afterClickWaitFor) {
       p.waitFor(condition);
     }
   }
