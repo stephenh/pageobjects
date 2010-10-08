@@ -12,7 +12,7 @@ Java.java.lang.System.setProperty("revision", VERSION_NUMBER)
 
 define "pageobjects" do
   project.version = VERSION_NUMBER
-  project.group = 'org.bizo'
+  project.group = 'com.bizo'
   ivy.compile_conf('default')
   package(:jar)
   package(:jar, :classifier => 'sources').clean.include :from => compile.sources
