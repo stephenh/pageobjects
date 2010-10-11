@@ -1,0 +1,11 @@
+<ivy-module version="2.0">
+  <info organisation="com.bizo" module="pageobjects" revision="${revision}"/>
+  <configurations>
+    <conf name="default"/>
+    <conf name="sources"/>
+  </configurations>
+  <dependencies defaultconfmapping="%->default;sources->sources()">
+    <dependency org="org.seleniumhq.selenium" name="selenium" rev="r9790" conf="default;sources" />
+    <dependency org="junit" name="junit" rev="4.8.1" conf="default;sources" />
+  </dependencies>
+</ivy-module>
