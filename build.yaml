@@ -1,8 +1,4 @@
 
 ivy:
   settings.file: ivysettings.xml
-  makepom.options:
-    nested:
-      mapping_1:
-        conf: default
-        scope: compile
+
