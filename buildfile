@@ -16,10 +16,13 @@ define "pageobjects" do
   project.version = VERSION_NUMBER
   project.group = 'com.bizo'
   ivy.compile_conf('default')
-  ivy.post_resolve do
-    ivy.makepom
+
+  package
+  package_with_sources
+
+  package(:jar).pom.tap do |pom|
+    pom.enhance [task('ivy:makepom')]
+    pom.from 'target/pom.xml'
   end
-  package(:jar)
-  package(:sources)
 end
 
