@@ -19,7 +19,6 @@ define "pageobjects" do
   project.group = 'com.bizo'
   ivy.compile_conf('compile')
 
-  package
   package_with_sources
 
   package(:jar).pom.tap do |pom|
