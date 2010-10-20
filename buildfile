@@ -17,7 +17,7 @@ Java.java.lang.System.setProperty("revision", VERSION_NUMBER)
 define "pageobjects" do
   project.version = VERSION_NUMBER
   project.group = 'com.bizo'
-  ivy.compile_conf('default')
+  ivy.compile_conf('compile')
 
   package
   package_with_sources
