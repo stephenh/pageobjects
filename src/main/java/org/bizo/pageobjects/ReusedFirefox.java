@@ -32,7 +32,11 @@ public class ReusedFirefox {
 
   private static void addExtension(final FirefoxProfile p, final String extension) {
     try {
-      p.addExtension(new File(extension));
+      File file = new File(extension);
+      if (!file.exists()) {
+        throw new IllegalArgumentException(extension + " location does not exist");
+      }
+      p.addExtension(file);
     } catch (final IOException e) {
       throw new RuntimeException(e);
     }
