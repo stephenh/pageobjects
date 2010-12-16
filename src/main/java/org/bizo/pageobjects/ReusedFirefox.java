@@ -15,15 +15,15 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 /** Helper class to reuse a local Firefox instance instead of having FirefoxDriver start one each and every time. */
 public class ReusedFirefox {
 
-  public static WebDriver reconnectOrLaunch(final String... extensions) {
+  public static WebDriver reconnectOrLaunch(boolean useNativeEvents, boolean useNoFocus, final String... extensions) {
     if (isAlreadyRunning()) {
       return new RemoteWebDriver(getLocalURL(), DesiredCapabilities.firefox());
     }
     // when this JVM terminates, leave the Firefox profile for the next test/JVM to use
     System.setProperty("webdriver.reap_profile", "false");
     final FirefoxProfile p = new FirefoxProfile();
-    // p.setAlwaysLoadNoFocusLib(true);
-    p.setEnableNativeEvents(true);
+    p.setAlwaysLoadNoFocusLib(useNoFocus);
+    p.setEnableNativeEvents(useNativeEvents);
     for (final String extension : extensions) {
       addExtension(p, extension);
     }
