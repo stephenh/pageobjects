@@ -11,6 +11,6 @@ public interface PageObject {
   String getOffsetId();
 
   /** Wait for {@code condition} to be true before continuing */
-  void waitFor(Condition condition);
+  void waitFor(Condition... conditions);
 
 }
