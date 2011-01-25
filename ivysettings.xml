@@ -1,5 +1,5 @@
 <ivysettings>
-	<settings defaultResolver="default" defaultResolveMode="dynamic"/>
+	<settings defaultResolver="default"/>
 	<include url="${ivy.default.settings.dir}/ivysettings-public.xml"/>
 	<property name="revision" value="SNAPSHOT" override="false"/>
 	<resolvers>
