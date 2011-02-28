@@ -1,5 +1,5 @@
 <ivy-module version="2.0">
-  <info organisation="com.bizo" module="pageobjects" revision="${revision}"/>
+  <info organisation="com.bizo" module="pageobjects" revision="${version}"/>
   <configurations>
     <conf name="default" extends="compile"/>
     <conf name="compile"/>
