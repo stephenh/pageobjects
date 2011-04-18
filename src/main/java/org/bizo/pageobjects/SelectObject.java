@@ -16,6 +16,10 @@ public class SelectObject extends AbstractElementObject {
     super(p, id);
   }
 
+  public SelectObject(final PageObject p, final By id) {
+    super(p, id);
+  }
+
   public void click() {
     element().click();
   }

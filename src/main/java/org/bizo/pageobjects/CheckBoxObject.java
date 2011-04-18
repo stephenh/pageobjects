@@ -3,9 +3,16 @@ package org.bizo.pageobjects;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import org.openqa.selenium.By;
+
 public class CheckBoxObject extends AbstractElementObject {
+
   public CheckBoxObject(final PageObject p, final String id) {
     super(p, id);
+  }
+
+  public CheckBoxObject(final PageObject p, final By by) {
+    super(p, by);
   }
 
   public void uncheck() {
