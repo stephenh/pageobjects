@@ -1,4 +1,4 @@
-package org.bizo.pageobjects;
+package com.bizo.pageobjects;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static org.hamcrest.CoreMatchers.is;

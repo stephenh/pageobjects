@@ -1,4 +1,4 @@
-package org.bizo.pageobjects;
+package com.bizo.pageobjects;
 
 import org.openqa.selenium.By;
 
