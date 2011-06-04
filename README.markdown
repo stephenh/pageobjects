@@ -16,7 +16,8 @@ E.g.:
 Then in your tests:
 
     public class HomePageText {
-      // setup a WebDriver instance, e.g. in a @BeforeClass
+      // setup a WebDriver instance, e.g. in a common base class
+      protected static final WebDriver webDriver = ...
       final HomePageObject home = new HomePageObject(webDriver);
 
       @Test
