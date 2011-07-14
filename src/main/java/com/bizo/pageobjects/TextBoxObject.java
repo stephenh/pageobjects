@@ -38,7 +38,7 @@ public class TextBoxObject extends AbstractElementObject {
   }
 
   public String get() {
-    return element().getValue();
+    return element().getText();
   }
 
   public void assertText(final String text) {

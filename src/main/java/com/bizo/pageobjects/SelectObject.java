@@ -49,7 +49,7 @@ public class SelectObject extends AbstractElementObject {
     boolean found = false;
     for (final WebElement element : element().findElements(By.tagName("option"))) {
       if (element.getText().equals(text)) {
-        element.setSelected();
+        element.click();
         found = true;
         break;
       }

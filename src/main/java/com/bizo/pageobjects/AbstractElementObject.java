@@ -5,7 +5,6 @@ import static org.junit.Assert.assertThat;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -31,17 +30,17 @@ public abstract class AbstractElementObject {
 
   /** @return the element's css value of {@code name}. */
   public String getCssValue(final String name) {
-    return ((RenderedWebElement) element()).getValueOfCssProperty(name);
+    return element().getCssValue(name);
   }
 
   /** @return the element's attribute value of {@code name}. */
   public String getAttribute(final String name) {
-    return ((RenderedWebElement) element()).getAttribute(name);
+    return element().getAttribute(name);
   }
 
   /** @return true if the element is present but not displayed. */
   public boolean isDisplayed() {
-    return ((RenderedWebElement) element()).isDisplayed();
+    return element().isDisplayed();
   }
 
   /** @return true if the element is in the DOM, regardless of being displayed or not. */
