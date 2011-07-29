@@ -1,4 +1,4 @@
-package org.bizo.pageobjects;
+package com.bizo.pageobjects;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,15 +15,15 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 /** Helper class to reuse a local Firefox instance instead of having FirefoxDriver start one each and every time. */
 public class ReusedFirefox {
 
-  public static WebDriver reconnectOrLaunch(final String... extensions) {
+  public static WebDriver reconnectOrLaunch(boolean useNativeEvents, boolean useNoFocus, final String... extensions) {
     if (isAlreadyRunning()) {
       return new RemoteWebDriver(getLocalURL(), DesiredCapabilities.firefox());
     }
     // when this JVM terminates, leave the Firefox profile for the next test/JVM to use
     System.setProperty("webdriver.reap_profile", "false");
     final FirefoxProfile p = new FirefoxProfile();
-    // p.setAlwaysLoadNoFocusLib(true);
-    p.setEnableNativeEvents(true);
+    p.setAlwaysLoadNoFocusLib(useNoFocus);
+    p.setEnableNativeEvents(useNativeEvents);
     for (final String extension : extensions) {
       addExtension(p, extension);
     }
@@ -32,7 +32,11 @@ public class ReusedFirefox {
 
   private static void addExtension(final FirefoxProfile p, final String extension) {
     try {
-      p.addExtension(new File(extension));
+      File file = new File(extension);
+      if (!file.exists()) {
+        throw new IllegalArgumentException(extension + " location does not exist");
+      }
+      p.addExtension(file);
     } catch (final IOException e) {
       throw new RuntimeException(e);
     }

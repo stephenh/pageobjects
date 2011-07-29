@@ -1,4 +1,4 @@
-package org.bizo.pageobjects;
+package com.bizo.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -18,17 +18,19 @@ public class AbstractPageObject implements PageObject {
   }
 
   @Override
-  public void waitFor(final Condition condition) {
-    new WebDriverWait(d, condition.getTimeoutSeconds()).until(new Function<WebDriver, Boolean>() {
-      @Override
-      public Boolean apply(final WebDriver from) {
-        try {
-          return condition.getCheck().apply(from);
-        } catch (final StaleElementReferenceException sere) {
-          return false;
+  public void waitFor(final Condition... conditions) {
+    for (final Condition condition : conditions) {
+      new WebDriverWait(d, condition.getTimeoutSeconds()).until(new Function<WebDriver, Boolean>() {
+        @Override
+        public Boolean apply(final WebDriver from) {
+          try {
+            return condition.getCheck().apply(from);
+          } catch (final StaleElementReferenceException sere) {
+            return false;
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   /** @return xpath interpolated with our offset id. */

@@ -1,4 +1,4 @@
-package org.bizo.pageobjects;
+package com.bizo.pageobjects;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -13,6 +13,10 @@ import org.openqa.selenium.WebElement;
 public class SelectObject extends AbstractElementObject {
 
   public SelectObject(final PageObject p, final String id) {
+    super(p, id);
+  }
+
+  public SelectObject(final PageObject p, final By id) {
     super(p, id);
   }
 
@@ -45,7 +49,7 @@ public class SelectObject extends AbstractElementObject {
     boolean found = false;
     for (final WebElement element : element().findElements(By.tagName("option"))) {
       if (element.getText().equals(text)) {
-        element.setSelected();
+        element.click();
         found = true;
         break;
       }

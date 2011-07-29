@@ -1,4 +1,4 @@
-package org.bizo.pageobjects;
+package com.bizo.pageobjects;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static org.hamcrest.CoreMatchers.is;
@@ -22,8 +22,10 @@ public class LinkObject extends AbstractElementObject {
   }
 
   /** Adds {@code condition} as something to wait for after clicking. */
-  public LinkObject afterClickWaitFor(final Condition condition) {
-    afterClickWaitFor.add(condition);
+  public LinkObject afterClickWaitFor(final Condition... conditions) {
+    for (Condition condition : conditions) {
+      afterClickWaitFor.add(condition);
+    }
     return this;
   }
 

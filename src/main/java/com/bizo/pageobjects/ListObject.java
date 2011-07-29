@@ -1,4 +1,4 @@
-package org.bizo.pageobjects;
+package com.bizo.pageobjects;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,8 +8,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class ListObject extends AbstractElementObject {
+
   public ListObject(final PageObject p, final String id) {
     super(p, id);
+  }
+
+  public ListObject(final PageObject p, final By by) {
+    super(p, by);
   }
 
   public List<String> getValues() {

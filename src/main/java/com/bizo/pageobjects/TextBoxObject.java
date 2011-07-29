@@ -1,4 +1,4 @@
-package org.bizo.pageobjects;
+package com.bizo.pageobjects;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -38,7 +38,7 @@ public class TextBoxObject extends AbstractElementObject {
   }
 
   public String get() {
-    return element().getValue();
+    return element().getText();
   }
 
   public void assertText(final String text) {
