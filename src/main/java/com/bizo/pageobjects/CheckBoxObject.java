@@ -1,11 +1,17 @@
 package com.bizo.pageobjects;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 public class CheckBoxObject extends AbstractElementObject {
+
+  private final List<ExpectedCondition<?>> afterCheckWaitFor = newArrayList();
 
   public CheckBoxObject(final PageObject p, final String id) {
     super(p, id);
@@ -15,41 +21,51 @@ public class CheckBoxObject extends AbstractElementObject {
     super(p, by);
   }
 
+  /** Adds {@code conditions} as something to wait for after checking. */
+  public CheckBoxObject afterCheckWaitFor(final ExpectedCondition<?>... conditions) {
+    for (ExpectedCondition<?> condition : conditions) {
+      afterCheckWaitFor.add(condition);
+    }
+    return this;
+  }
+
   public void uncheck() {
     if (!isChecked()) {
       throw new RuntimeException("Already unchecked " + by);
     }
-    element().click();
+    getElement().click();
+    p.waitFor(afterCheckWaitFor);
   }
 
   public void check() {
     if (isChecked()) {
       throw new RuntimeException("Already checked " + by);
     }
-    element().click();
+    getElement().click();
+    p.waitFor(afterCheckWaitFor);
   }
 
   public void assertChecked() {
-    assertThat(element().isSelected(), is(true));
+    assertThat(getElement().isSelected(), is(true));
   }
 
   public void assertNotChecked() {
-    assertThat(element().isSelected(), is(false));
+    assertThat(getElement().isSelected(), is(false));
   }
 
   public void assertEnabled() {
-    assertThat(element().isEnabled(), is(true));
+    assertThat(getElement().isEnabled(), is(true));
   }
 
   public void assertDisabled() {
-    assertThat(element().isEnabled(), is(false));
+    assertThat(getElement().isEnabled(), is(false));
   }
 
   public boolean isChecked() {
-    return element().isSelected();
+    return getElement().isSelected();
   }
 
   public boolean isEnabled() {
-    return element().isEnabled();
+    return getElement().isEnabled();
   }
 }

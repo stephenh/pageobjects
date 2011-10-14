@@ -18,11 +18,11 @@ public class TextObject extends AbstractElementObject {
   }
 
   public void click() {
-    element().click();
+    getElement().click();
   }
 
   public String get() {
-    return element().getText();
+    return getElement().getText();
   }
 
   public void assertText(final String text) {

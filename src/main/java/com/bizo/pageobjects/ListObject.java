@@ -19,7 +19,7 @@ public class ListObject extends AbstractElementObject {
 
   public List<String> getValues() {
     final List<String> values = new ArrayList<String>();
-    for (final WebElement li : element().findElements(By.tagName("li"))) {
+    for (final WebElement li : getElement().findElements(By.tagName("li"))) {
       values.add(li.getText());
     }
     return values;

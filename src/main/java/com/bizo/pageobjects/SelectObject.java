@@ -21,7 +21,7 @@ public class SelectObject extends AbstractElementObject {
   }
 
   public void click() {
-    element().click();
+    getElement().click();
   }
 
   public void assertSelected(final String text) {
@@ -30,14 +30,14 @@ public class SelectObject extends AbstractElementObject {
 
   public List<String> getItems() {
     final List<String> items = new ArrayList<String>();
-    for (final WebElement element : element().findElements(By.tagName("option"))) {
+    for (final WebElement element : getElement().findElements(By.tagName("option"))) {
       items.add(element.getText());
     }
     return items;
   }
 
   public String getSelected() {
-    for (final WebElement element : element().findElements(By.tagName("option"))) {
+    for (final WebElement element : getElement().findElements(By.tagName("option"))) {
       if (element.isSelected()) {
         return element.getText();
       }
@@ -47,7 +47,7 @@ public class SelectObject extends AbstractElementObject {
 
   public void select(final String text) {
     boolean found = false;
-    for (final WebElement element : element().findElements(By.tagName("option"))) {
+    for (final WebElement element : getElement().findElements(By.tagName("option"))) {
       if (element.getText().equals(text)) {
         element.click();
         found = true;
@@ -58,7 +58,7 @@ public class SelectObject extends AbstractElementObject {
       fail("No option found for " + text);
     }
     // This magically fires a blur on the box
-    element().click();
-    element().click();
+    getElement().click();
+    getElement().click();
   }
 }

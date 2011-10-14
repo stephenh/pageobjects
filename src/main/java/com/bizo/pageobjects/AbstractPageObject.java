@@ -1,11 +1,13 @@
 package com.bizo.pageobjects;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.google.common.base.Function;
 
 /** A base class for user page objects. */
 public class AbstractPageObject implements PageObject {
@@ -18,18 +20,18 @@ public class AbstractPageObject implements PageObject {
   }
 
   @Override
-  public void waitFor(final Condition... conditions) {
-    for (final Condition condition : conditions) {
-      new WebDriverWait(d, condition.getTimeoutSeconds()).until(new Function<WebDriver, Boolean>() {
-        @Override
-        public Boolean apply(final WebDriver from) {
-          try {
-            return condition.getCheck().apply(from);
-          } catch (final StaleElementReferenceException sere) {
-            return false;
-          }
-        }
-      });
+  public void waitFor(final ExpectedCondition<?>... conditions) {
+    waitFor(Arrays.asList(conditions));
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public void waitFor(final List<ExpectedCondition<?>> conditions) {
+    for (final ExpectedCondition<?> condition : conditions) {
+      long timeout = PageObjectSettings.getTimeout();
+      new WebDriverWait(d, timeout) //
+        .ignoring(StaleElementReferenceException.class)
+        .until(condition);
     }
   }
 

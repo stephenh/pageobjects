@@ -7,11 +7,12 @@ import static org.junit.Assert.assertThat;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 /** A helper object to click on links. */
 public class LinkObject extends AbstractElementObject {
 
-  private final List<Condition> afterClickWaitFor = newArrayList();
+  private final List<ExpectedCondition<?>> afterClickWaitFor = newArrayList();
 
   public LinkObject(final PageObject p, final String id) {
     super(p, id);
@@ -21,9 +22,9 @@ public class LinkObject extends AbstractElementObject {
     super(p, by);
   }
 
-  /** Adds {@code condition} as something to wait for after clicking. */
-  public LinkObject afterClickWaitFor(final Condition... conditions) {
-    for (Condition condition : conditions) {
+  /** Adds {@code conditions} as something to wait for after clicking. */
+  public LinkObject afterClickWaitFor(final ExpectedCondition<?>... conditions) {
+    for (ExpectedCondition<?> condition : conditions) {
       afterClickWaitFor.add(condition);
     }
     return this;
@@ -31,22 +32,20 @@ public class LinkObject extends AbstractElementObject {
 
   /** Clicks on the link and optionally waits for any after click conditions. */
   public void click() {
-    element().click();
-    for (final Condition condition : afterClickWaitFor) {
-      p.waitFor(condition);
-    }
+    getElement().click();
+    p.waitFor(afterClickWaitFor);
   }
 
   public String getTitle() {
-    return element().getAttribute("title");
+    return getElement().getAttribute("title");
   }
 
   public String getText() {
-    return element().getText();
+    return getElement().getText();
   }
 
   public String getHref() {
-    return element().getAttribute("href");
+    return getElement().getAttribute("href");
   }
 
   public void assertText(final String expected) {
