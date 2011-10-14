@@ -1,6 +1,7 @@
 package com.bizo.pageobjects;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 public interface PageObject {
 
@@ -11,6 +12,6 @@ public interface PageObject {
   String getOffsetId();
 
   /** Wait for {@code condition} to be true before continuing */
-  void waitFor(Condition... conditions);
+  void waitFor(ExpectedCondition<?>... conditions);
 
 }
