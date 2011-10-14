@@ -1,11 +1,17 @@
 package com.bizo.pageobjects;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 public class CheckBoxObject extends AbstractElementObject {
+
+  private final List<ExpectedCondition<?>> afterCheckWaitFor = newArrayList();
 
   public CheckBoxObject(final PageObject p, final String id) {
     super(p, id);
@@ -15,11 +21,20 @@ public class CheckBoxObject extends AbstractElementObject {
     super(p, by);
   }
 
+  /** Adds {@code conditions} as something to wait for after checking. */
+  public CheckBoxObject afterCheckWaitFor(final ExpectedCondition<?>... conditions) {
+    for (ExpectedCondition<?> condition : conditions) {
+      afterCheckWaitFor.add(condition);
+    }
+    return this;
+  }
+
   public void uncheck() {
     if (!isChecked()) {
       throw new RuntimeException("Already unchecked " + by);
     }
     getElement().click();
+    p.waitFor(afterCheckWaitFor);
   }
 
   public void check() {
@@ -27,6 +42,7 @@ public class CheckBoxObject extends AbstractElementObject {
       throw new RuntimeException("Already checked " + by);
     }
     getElement().click();
+    p.waitFor(afterCheckWaitFor);
   }
 
   public void assertChecked() {

@@ -22,7 +22,7 @@ public class LinkObject extends AbstractElementObject {
     super(p, by);
   }
 
-  /** Adds {@code condition} as something to wait for after clicking. */
+  /** Adds {@code conditions} as something to wait for after clicking. */
   public LinkObject afterClickWaitFor(final ExpectedCondition<?>... conditions) {
     for (ExpectedCondition<?> condition : conditions) {
       afterClickWaitFor.add(condition);
@@ -33,9 +33,7 @@ public class LinkObject extends AbstractElementObject {
   /** Clicks on the link and optionally waits for any after click conditions. */
   public void click() {
     getElement().click();
-    for (final ExpectedCondition<?> condition : afterClickWaitFor) {
-      p.waitFor(condition);
-    }
+    p.waitFor(afterClickWaitFor);
   }
 
   public String getTitle() {
