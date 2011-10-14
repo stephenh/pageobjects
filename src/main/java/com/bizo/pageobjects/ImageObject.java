@@ -13,7 +13,7 @@ public class ImageObject extends AbstractElementObject {
   }
 
   public String getSource() {
-    return element().getAttribute("src");
+    return getElement().getAttribute("src");
   }
 
 }

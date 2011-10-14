@@ -30,23 +30,23 @@ public abstract class AbstractElementObject {
 
   /** @return the element's css value of {@code name}. */
   public String getCssValue(final String name) {
-    return element().getCssValue(name);
+    return getElement().getCssValue(name);
   }
 
   /** @return the element's attribute value of {@code name}. */
   public String getAttribute(final String name) {
-    return element().getAttribute(name);
+    return getElement().getAttribute(name);
   }
 
   /** @return true if the element is present but not displayed. */
   public boolean isDisplayed() {
-    return element().isDisplayed();
+    return getElement().isDisplayed();
   }
 
   /** @return true if the element is in the DOM, regardless of being displayed or not. */
   public boolean isPresent() {
     try {
-      element();
+      getElement();
       return true;
     } catch (final NoSuchElementException nsee) {
       return false;
@@ -71,7 +71,7 @@ public abstract class AbstractElementObject {
   }
 
   /** @return the element we're wrapping. */
-  protected WebElement element() {
+  public WebElement getElement() {
     return getWebDriver().findElement(by);
   }
 
@@ -84,7 +84,7 @@ public abstract class AbstractElementObject {
   public Supplier<Boolean> nowEnabled() {
     return new Supplier<Boolean>() {
       public Boolean get() {
-        return element().isEnabled();
+        return getElement().isEnabled();
       }
     };
   }

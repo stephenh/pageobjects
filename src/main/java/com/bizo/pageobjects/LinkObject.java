@@ -31,22 +31,22 @@ public class LinkObject extends AbstractElementObject {
 
   /** Clicks on the link and optionally waits for any after click conditions. */
   public void click() {
-    element().click();
+    getElement().click();
     for (final Condition condition : afterClickWaitFor) {
       p.waitFor(condition);
     }
   }
 
   public String getTitle() {
-    return element().getAttribute("title");
+    return getElement().getAttribute("title");
   }
 
   public String getText() {
-    return element().getText();
+    return getElement().getText();
   }
 
   public String getHref() {
-    return element().getAttribute("href");
+    return getElement().getAttribute("href");
   }
 
   public void assertText(final String expected) {

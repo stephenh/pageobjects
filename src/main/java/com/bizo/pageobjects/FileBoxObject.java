@@ -14,7 +14,7 @@ public class FileBoxObject extends AbstractElementObject {
   }
 
   public void type(final String value) {
-    element().sendKeys(value);
+    getElement().sendKeys(value);
     // Firefox does not fire onchange even if we send tab (it gets mangled) or
     // focus on another element, so do this the very explicit way
     final String script = "var e = document.createEvent('HTMLEvents');"//

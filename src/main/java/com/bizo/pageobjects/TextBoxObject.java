@@ -19,7 +19,7 @@ public class TextBoxObject extends AbstractElementObject {
   }
 
   public void sendKeys(final String value) {
-    element().sendKeys(value);
+    getElement().sendKeys(value);
   }
 
   public void type(final String value) {
@@ -29,7 +29,7 @@ public class TextBoxObject extends AbstractElementObject {
     // Without the tab, an onchange event will not fire until the next element
     // is selected
     final CharSequence ctrl = usingMac() ? MAC_COMMAND_KEY : Keys.CONTROL;
-    element().sendKeys(Keys.chord(ctrl, "a", Keys.NULL, Keys.DELETE, value, Keys.NULL, Keys.SHIFT, Keys.TAB));
+    getElement().sendKeys(Keys.chord(ctrl, "a", Keys.NULL, Keys.DELETE, value, Keys.NULL, Keys.SHIFT, Keys.TAB));
     getWebDriver().findElement(By.id("dummy-click-div")).click();
   }
 
@@ -38,7 +38,7 @@ public class TextBoxObject extends AbstractElementObject {
   }
 
   public String get() {
-    return element().getAttribute("value");
+    return getElement().getAttribute("value");
   }
 
   public void assertText(final String text) {

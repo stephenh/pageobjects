@@ -19,37 +19,37 @@ public class CheckBoxObject extends AbstractElementObject {
     if (!isChecked()) {
       throw new RuntimeException("Already unchecked " + by);
     }
-    element().click();
+    getElement().click();
   }
 
   public void check() {
     if (isChecked()) {
       throw new RuntimeException("Already checked " + by);
     }
-    element().click();
+    getElement().click();
   }
 
   public void assertChecked() {
-    assertThat(element().isSelected(), is(true));
+    assertThat(getElement().isSelected(), is(true));
   }
 
   public void assertNotChecked() {
-    assertThat(element().isSelected(), is(false));
+    assertThat(getElement().isSelected(), is(false));
   }
 
   public void assertEnabled() {
-    assertThat(element().isEnabled(), is(true));
+    assertThat(getElement().isEnabled(), is(true));
   }
 
   public void assertDisabled() {
-    assertThat(element().isEnabled(), is(false));
+    assertThat(getElement().isEnabled(), is(false));
   }
 
   public boolean isChecked() {
-    return element().isSelected();
+    return getElement().isSelected();
   }
 
   public boolean isEnabled() {
-    return element().isEnabled();
+    return getElement().isEnabled();
   }
 }
