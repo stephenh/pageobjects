@@ -28,5 +28,7 @@ Then in your tests:
       }
     }
 
+Heavily inspired by Selenium's [Page Objects](http://code.google.com/p/selenium/wiki/PageObjects), although with a slightly different take.
+
 Available in the [http://repo.joist.ws](http://repo.joist.ws) maven repository, as `com.bizo` `pageobjects` `<version>`.
 
