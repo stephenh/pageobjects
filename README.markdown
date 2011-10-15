@@ -28,3 +28,5 @@ Then in your tests:
       }
     }
 
+Available in the [http://repo.joist.ws](http://repo.joist.ws) maven repository, as `com.bizo` `pageobjects` `<version>`.
+
