@@ -18,7 +18,7 @@ E.g.:
 
 Then in your tests:
 
-    public class HomePageText {
+    public class HomePageTest {
       // setup a WebDriver instance, e.g. in a common base class
       protected static final WebDriver webDriver = ...
       final HomePageObject home = new HomePageObject(webDriver);
@@ -43,7 +43,7 @@ Because Selenium 2.0 closely mimics the browser, just sending keys to a text box
 
 There are a variety of ways to do this (tabbing to the next/previous element for example), but pageobjects uses a "dummy" div that exists solely for switching the focus away from text elements.
 
-This benefit of the dedicated div is that other elements (next/previous) on your page won't be selected as a side-effecting by typing in the current element.
+This benefit of the dedicated div is that other elements (next/previous) on your page won't be selected as a side-effect by typing in the current element (potentially causing premature validation/etc.).
 
 The downside is that you need an extra element on your page, but it should be easy to put it in a header/footer somewhere and use the following CSS to hide it:
 
@@ -60,9 +60,9 @@ The downside is that you need an extra element on your page, but it should be ea
     }
     <div id="dummy-click-div" class=".dummyClickDiv">&nbsp;</div>
 
-This uses `position: fixed` otherwise if the click div is at the bottom of the page, but a form element is at the bottom, Selenium will jump back/forth scrolling each into view. This isn't a big deal if you want to leave the click div at the bottom of your page.
+This uses `position: fixed` otherwise if the click div is at the bottom of the page, but a form element is at the top, Selenium will jump back/forth scrolling each into view. This isn't a big deal, just annoying if you're watching the test manually.
 
-**Note:** You can change the dummy click div id by setting the `pageobjects.dummyClickDiv` system property, or calling `DummyClickDiv.setId`. If you set it to `null`, the clicking the dummy element will be skipped and `shift tab` will be used to change focus instead.
+**Note:** You can change the dummy click div id by setting the `pageobjects.dummyClickDiv` system property, or calling `DummyClickDiv.setId`. If you set it to `null`, the dummy element logic will be skipped and `shift tab` will be used to change focus instead.
 
 Credits
 -------
