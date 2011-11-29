@@ -30,7 +30,11 @@ public class TextBoxObject extends AbstractElementObject {
     // remove existing text
     getElement().sendKeys(EFFECTIVE_CONTROL, "a", Keys.NULL, Keys.DELETE, value);
     // onchange event will not fire until a different element is selected
-    getWebDriver().findElement(By.id("dummy-click-div")).click();
+    if (DummyClickDiv.isEnabled()) {
+      DummyClickDiv.click(getWebDriver());
+    } else {
+      getElement().sendKeys(Keys.chord(Keys.SHIFT, Keys.TAB));
+    }
   }
 
   public String get() {

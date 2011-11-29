@@ -2,7 +2,6 @@ package com.bizo.pageobjects;
 
 import java.io.File;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 
 public class FileBoxObject extends AbstractElementObject {
@@ -34,7 +33,11 @@ public class FileBoxObject extends AbstractElementObject {
       ((JavascriptExecutor) getWebDriver()).executeScript(script);
     }
     // go ahead and click dummy-click-div in case its not FF
-    getWebDriver().findElement(By.id("dummy-click-div")).click();
+    if (DummyClickDiv.isEnabled()) {
+      DummyClickDiv.click(getWebDriver());
+    } else {
+      // not sure what to do here--the tab char got corrupted by FF
+    }
   }
 
 }
