@@ -1,5 +1,7 @@
 package com.bizo.pageobjects;
 
+import java.io.File;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 
@@ -11,6 +13,10 @@ public class FileBoxObject extends AbstractElementObject {
   public FileBoxObject(final PageObject p, final String id) {
     super(p, id);
     this.id = id;
+  }
+
+  public void set(File file) {
+    type(file.getAbsolutePath());
   }
 
   public void type(final String value) {
