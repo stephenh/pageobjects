@@ -25,7 +25,6 @@ public class AbstractPageObject implements PageObject {
   }
 
   @Override
-  @SuppressWarnings("unchecked")
   public void waitFor(final List<ExpectedCondition<?>> conditions) {
     for (final ExpectedCondition<?> condition : conditions) {
       long timeout = PageObjectSettings.getTimeout();
