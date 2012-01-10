@@ -8,12 +8,6 @@ import org.openqa.selenium.Keys;
 
 public class TextBoxObject extends AbstractElementObject {
 
-  private static Keys EFFECTIVE_CONTROL = isMac() ? Keys.META : Keys.CONTROL;
-
-  private static boolean isMac() {
-    return System.getProperty("mrj.version") != null;
-  }
-
   public TextBoxObject(final PageObject p, final String id) {
     super(p, id);
   }
@@ -28,7 +22,8 @@ public class TextBoxObject extends AbstractElementObject {
 
   public void type(final String value) {
     // remove existing text
-    getElement().sendKeys(EFFECTIVE_CONTROL, "a", Keys.NULL, Keys.DELETE, value);
+    getElement().clear();
+    getElement().sendKeys(value);
     // onchange event will not fire until a different element is selected
     if (DummyClickDiv.isEnabled()) {
       DummyClickDiv.click(getWebDriver());
