@@ -19,8 +19,7 @@ public abstract class AbstractElementObject {
   protected final By by;
 
   public AbstractElementObject(final PageObject p, final String id) {
-    this.p = p;
-    by = new ByWithIdInterpolation(p, id);
+    this(p, By.id(id));
   }
 
   public AbstractElementObject(final PageObject p, final By by) {
