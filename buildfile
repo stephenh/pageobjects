@@ -3,7 +3,7 @@ require 'buildr/ivy_extension'
 
 VERSION_NUMBER = ENV['version'] || 'SNAPSHOT'
 
-repositories.remote << "http://www.ibiblio.org/maven2/"
+repositories.remote << "http://repo1.maven.org/maven2/"
 repositories.release_to = 'sftp://joist.ws/var/joist.repo'
 repositories.release_to[:permissions] = 0644
 
@@ -17,8 +17,8 @@ define "pageobjects" do
 
   package_with_sources
 
+  file 'target/pom.xml' => task('ivy:makepom')
   package(:jar).pom.tap do |pom|
-    pom.enhance [task('ivy:makepom')]
     pom.from 'target/pom.xml'
   end
 end
