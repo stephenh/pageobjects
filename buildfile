@@ -16,6 +16,7 @@ define "pageobjects" do
   ivy.compile_conf('compile')
 
   package_with_sources
+  compile.options.source = compile.options.target = '1.6'
 
   file 'target/pom.xml' => task('ivy:makepom')
   package(:jar).pom.tap do |pom|
