@@ -4,12 +4,9 @@ import java.io.File;
 
 public class FileBoxObject extends AbstractElementObject {
 
-  private final String id;
-
   /** Only take an id for our firefox change hack. */
   public FileBoxObject(final PageObject p, final String id) {
     super(p, id);
-    this.id = id;
   }
 
   public void set(File file) {

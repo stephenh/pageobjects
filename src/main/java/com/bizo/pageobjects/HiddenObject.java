@@ -3,27 +3,23 @@ package com.bizo.pageobjects;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
-public class TextObject extends AbstractElementObject {
+/** A class to get the text of off-screen/debug elements that are otherwise hidden. */
+public class HiddenObject extends AbstractElementObject {
 
-  public TextObject(final PageObject p, final By by) {
-    super(p, by);
-  }
+  private final String id;
 
-  public TextObject(final PageObject p, final String id) {
+  public HiddenObject(final PageObject p, final String id) {
     super(p, id);
-  }
-
-  public void click() {
-    getElement().click();
+    this.id = id;
   }
 
   public String get() {
-    return getElement().getText();
+    return (String) ((JavascriptExecutor) getWebDriver()).executeScript(//
+      "var d = document.getElementById('" + id + "'); return (d == null) ? '' : d.innerHTML;");
   }
 
   public void assertText(final String text) {
@@ -37,11 +33,5 @@ public class TextObject extends AbstractElementObject {
       }
     };
   }
-
-  private static String getHiddenText(final WebDriver d, final String elementId) {
-    return (String) ((JavascriptExecutor) d).executeScript(//
-      "var d = document.getElementById('" + elementId + "'); return (d == null) ? '' : d.innerHTML;");
-  }
-  
 
 }
