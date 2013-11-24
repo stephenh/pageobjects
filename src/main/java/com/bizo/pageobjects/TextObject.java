@@ -4,8 +4,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.openqa.selenium.By;
-
-import com.google.common.base.Supplier;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 public class TextObject extends AbstractElementObject {
 
@@ -29,12 +30,18 @@ public class TextObject extends AbstractElementObject {
     assertThat(get(), is(text));
   }
 
-  public Supplier<Boolean> nowHasText(final String text) {
-    return new Supplier<Boolean>() {
-      public Boolean get() {
-        return text.equals(TextObject.this.get());
+  public ExpectedCondition<Boolean> nowHasText(final String text) {
+    return new ExpectedCondition<Boolean>() {
+      public Boolean apply(WebDriver input) {
+        return text.equals(get());
       }
     };
   }
+
+  private static String getHiddenText(final WebDriver d, final String elementId) {
+    return (String) ((JavascriptExecutor) d).executeScript(//
+      "var d = document.getElementById('" + elementId + "'); return (d == null) ? '' : d.innerHTML;");
+  }
+  
 
 }
