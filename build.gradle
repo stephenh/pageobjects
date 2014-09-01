@@ -1,0 +1,32 @@
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+
+group = 'com.bizo'
+version = System.getProperty('version', 'SNAPSHOT')
+sourceCompatibility = '1.6'
+targetCompatibility = '1.6'
+
+configurations {
+  deployerJars
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile 'org.seleniumhq.selenium:selenium-java:2.37.0'
+  compile 'junit:junit:4.8.1'
+  deployerJars 'org.apache.maven.wagon:wagon-ssh-external:2.3'
+}
+
+uploadArchives {
+  repositories.mavenDeployer {
+    configuration = configurations.deployerJars
+      repository(url: 'scpexe://repo.joist.ws/var/www/joist.repo') {
+        authentication(userName: 'root')
+      }
+  }
+}
