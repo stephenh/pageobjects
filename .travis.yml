@@ -4,4 +4,4 @@ env:
   - secure: DDEJfKcYHwumt6JBR2jbWFDk4ksHZzJv7Od5kxfXaLitvchAW7D9wsRQqqUsniiSKkT7JB8IrxH6+O9HWH7k5huX3kv6liptBbXmjm2TIJ28g27/Q1W3gVnMbjemA6xhXK68TMS7D1DxVQZvACy5o5dHojVfgcv3qVB343w6vUs=
   - secure: IUOsK4hdkDBFf8bk8fTcDmd2zm4GAkUCmHhzyUv+FdCLZiwnOwMlSDAc4SgmkuynMIdNWS4aWSvl5HdhRn7Hlbhv19oLR/NFh2VRZvDZrBshl3cLKwBcCaLwcNGcVs6hJvsy8gtEbY39NP8cD9DxjnVEfYxRfv+3gcf76mGmwyM=
 after_success:
-  - gradle uploadArtifacts
+  - test $TRAVIS_BRANCH == "stable" && gradle uploadArchives
