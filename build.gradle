@@ -4,13 +4,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven'
 
 group = 'com.bizo'
-
-version = {
-   def p = ['sh', '-c', 'git tag --contains HEAD | head -n 1'].execute()
-   p.waitFor()
-   p.in.text.empty ? 'SNAPSHOT' : p.in.text
-}()
-
+version = [System.env.TRAVIS_TAG, System.env.VERSION, 'SNAPSHOT'].find { !it.empty }
 sourceCompatibility = '1.6'
 targetCompatibility = '1.6'
 
