@@ -1,4 +1,6 @@
 
+<a href="https://travis-ci.org/stephenh/pageobjects"><img src="https://api.travis-ci.org/stephenh/pageobjects.svg"></a>
+
 A small set of objects to test webapps via selenium.
 
 Example
