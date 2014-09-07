@@ -4,7 +4,13 @@ apply plugin: 'eclipse'
 apply plugin: 'maven'
 
 group = 'com.bizo'
-version = System.getProperty('version', 'SNAPSHOT')
+
+version = {
+   def p = ['sh', '-c', 'git tag --contains HEAD | head -n 1'].execute()
+   p.waitFor()
+   p.in.text.empty ? 'SNAPSHOT' : p.in.text
+}()
+
 sourceCompatibility = '1.6'
 targetCompatibility = '1.6'
 
@@ -25,8 +31,8 @@ dependencies {
 uploadArchives {
   repositories.mavenDeployer {
     configuration = configurations.deployerJars
-      repository(url: 'scpexe://repo.joist.ws/var/www/joist.repo') {
-        authentication(userName: "$System.env.REPO_USERNAME", password: "$System.env.REPO_PASSWORD")
-      }
+    repository(url: 'scpexe://repo.joist.ws/var/www/joist.repo') {
+      authentication(userName: "$System.env.REPO_USERNAME", password: "$System.env.REPO_PASSWORD")
+    }
   }
 }
