@@ -4,7 +4,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven'
 
 group = 'com.bizo'
-version = [System.env.TRAVIS_TAG, System.env.VERSION, 'SNAPSHOT'].find { !it.empty }
+version = [System.env.TRAVIS_TAG, System.env.VERSION, 'SNAPSHOT'].find { it != null }
 sourceCompatibility = '1.6'
 targetCompatibility = '1.6'
 
