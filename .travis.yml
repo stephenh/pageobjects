@@ -1,9 +1,8 @@
 language: java
 env:
   global:
-  - secure: DDEJfKcYHwumt6JBR2jbWFDk4ksHZzJv7Od5kxfXaLitvchAW7D9wsRQqqUsniiSKkT7JB8IrxH6+O9HWH7k5huX3kv6liptBbXmjm2TIJ28g27/Q1W3gVnMbjemA6xhXK68TMS7D1DxVQZvACy5o5dHojVfgcv3qVB343w6vUs=
-  - secure: IUOsK4hdkDBFf8bk8fTcDmd2zm4GAkUCmHhzyUv+FdCLZiwnOwMlSDAc4SgmkuynMIdNWS4aWSvl5HdhRn7Hlbhv19oLR/NFh2VRZvDZrBshl3cLKwBcCaLwcNGcVs6hJvsy8gtEbY39NP8cD9DxjnVEfYxRfv+3gcf76mGmwyM=
+  - secure: rTJNpfboNtUgOQi/bXf5aqghkMD/MlhotCtYLknDLKzCu7Epc36YJheaErcAR1tSNDud3tKiVPockI+hCOsHG1YvnTTslBQeGzcE1FjiaaztzQnMzIHPQorzc4Zq4asF0Fb6TduD8ptbaJHzEDwERuQIpAB7FsIv+ZUM1UE0zOE=
+  - secure: WqkBrD6MZU7PEE6cvuyANr7Zr4RyjkNulXP/Oii2mXfa09p16irzUl/jxr+NT5the2EipCeS+vNrlE5YzzmdHLoVmkdT1qk1q82yr4VRJjomzpKbjdrQsccJMiJvf17rcOSAl0ATsvr3RhCrQvbsAy3s2KOnqlmFy/TI6N0D/GM=
 after_success:
   - test -n "$TRAVIS_TAG" && ssh-keyscan -H repo.joist.ws >> ~/.ssh/known_hosts
   - test -n "$TRAVIS_TAG" && gradle uploadArchives --stacktrace
-
