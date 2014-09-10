@@ -7,4 +7,4 @@ after_success:
   - test -n "$TRAVIS_TAG" && ssh-keyscan -H repo.joist.ws >> ~/.ssh/known_hosts
   - test -n "$TRAVIS_TAG" && echo "user=$REPO_USERNAME"
   - test -n "$TRAVIS_TAG" && echo "pass=$REPO_PASSWORD"
-  - test -n "$TRAVIS_TAG" && gradle uploadArchives --stacktrace
+  - test -n "$TRAVIS_TAG" && gradle uploadArchives --stacktrace -d
