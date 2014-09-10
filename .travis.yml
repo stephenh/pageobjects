@@ -4,4 +4,7 @@ env:
   - secure: KbeTCj0z49V/LqGhnbFlgz6L4gIS/W+jbsM/TtvtuLO/TLptSexNhMmsUrF/5cPQmu2H3E5h8gR/SKKCBelHwAc0HHPQmubu3REkvvKdoBthlVb2HUaeaqb66QnblTfwCp78ofWX2XYMRdrRvYNnMBvmeLPg0i7JkoO/1R+nFwI=
   - secure: b/G6Xyb94VQIiqhZJuCKyaLsUeEdHdEp40xeWoUhRjwlT/wlf4bEX31IdM81bSwlr0GtAzadvh2WAO52WiPLwBuIjAgCy2fJ2Soas0KuRpsFFAmk0pBL7d0sza9A6T0VTrOvLvSU9gADPstAwv1XnBhrQ34Lqk5kAGGbrozYaP8=
 after_success:
+  - test -n "$TRAVIS_TAG" && ssh-keyscan -H repo.joist.ws >> ~/.ssh/known_hosts
+  - test -n "$TRAVIS_TAG" && echo "user=$REPO_USERNAME"
+  - test -n "$TRAVIS_TAG" && echo "pass=$REPO_PASSWORD"
   - test -n "$TRAVIS_TAG" && gradle uploadArchives --stacktrace
