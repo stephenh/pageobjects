@@ -5,4 +5,5 @@ env:
   - secure: WqkBrD6MZU7PEE6cvuyANr7Zr4RyjkNulXP/Oii2mXfa09p16irzUl/jxr+NT5the2EipCeS+vNrlE5YzzmdHLoVmkdT1qk1q82yr4VRJjomzpKbjdrQsccJMiJvf17rcOSAl0ATsvr3RhCrQvbsAy3s2KOnqlmFy/TI6N0D/GM=
 after_success:
   - test -n "$TRAVIS_TAG" && ssh-keyscan -H repo.joist.ws >> ~/.ssh/known_hosts
+  - test -n "$TRAVIS_TAG" && ssh-keyscan -H 173.45.233.62 >> ~/.ssh/known_hosts
   - test -n "$TRAVIS_TAG" && gradle uploadArchives --stacktrace
