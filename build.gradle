@@ -19,14 +19,14 @@ repositories {
 dependencies {
   compile 'org.seleniumhq.selenium:selenium-java:2.37.0'
   compile 'junit:junit:4.8.1'
-  deployerJars 'org.apache.maven.wagon:wagon-ssh-external:2.3'
+  deployerJars 'org.apache.maven.wagon:wagon-ssh:2.6'
 }
 
 uploadArchives {
   repositories.mavenDeployer {
     configuration = configurations.deployerJars
-    repository(url: 'scpexe://repo.joist.ws/var/www/joist.repo') {
-      authentication(userName: "$System.env.REPO_USERNAME", password: "$System.env.REPO_PASSWORD")
+    repository(url: 'scp://repo.joist.ws/var/www/joist.repo') {
+      authentication(userName: System.env.REPO_USERNAME, password: System.env.REPO_PASSWORD)
     }
   }
 }
